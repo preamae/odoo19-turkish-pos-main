@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Frontend Templates – Turkish Virtual POS                      -->
+    <!-- ============================================================ -->
+
+    <!-- ============================================================ -->
+    <!-- Credit Card Inline Form with Card Preview                     -->
+    <!-- ============================================================ -->
+    <template id="mews_pos_inline_form" name="Turkish POS - Kredi Karti Formu">
+        <div id="turkish_pos_payment_form" class="turkish-pos-form">
+
+            <!-- ========== Card Preview ========== -->
+            <div class="tp-card-preview mb-3">
+                <div class="tp-card tp-card-front">
+                    <div class="tp-card-chip">
+                        <img src="/turkish_pos/static/src/img/chip.png" alt="Chip" width="50"/>
+                    </div>
+                    <div class="tp-card-number" id="tp_preview_card_number">
+                        **** **** **** ****
+                    </div>
+                    <div class="tp-card-info d-flex justify-content-between">
+                        <div class="tp-card-holder">
+                            <span class="tp-card-label">Kart Sahibi</span>
+                            <span id="tp_preview_card_holder">AD SOYAD</span>
+                        </div>
+                        <div class="tp-card-expiry">
+                            <span class="tp-card-label">Son Kullanma</span>
+                            <span id="tp_preview_card_expiry">AA/YY</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-brand" id="tp_preview_card_brand"></div>
+                </div>
+            </div>
+
+            <!-- ========== Card Entry Form ========== -->
+            <div class="tp-form-fields">
+                <!-- Card Holder Name -->
+                <div class="mb-3">
+                    <label for="tp_card_holder_name" class="form-label">
+                        Kart Uzerindeki Isim
+                    </label>
+                    <input type="text"
+                           id="tp_card_holder_name"
+                           name="card_holder_name"
+                           class="form-control tp-input"
+                           placeholder="Kart sahibinin adi"
+                           autocomplete="cc-name"
+                           required="required"/>
+                </div>
+
+                <!-- Card Number -->
+                <div class="mb-3">
+                    <label for="tp_card_number" class="form-label">
+                        Kart Numarasi
+                    </label>
+                    <input type="text"
+                           id="tp_card_number"
+                           name="card_number"
+                           class="form-control tp-input"
+                           placeholder="0000 0000 0000 0000"
+                           inputmode="numeric"
+                           maxlength="24"
+                           autocomplete="cc-number"
+                           required="required"/>
+                </div>
+
+                <!-- Expiry & CVV Row -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="tp_expiry_month" class="form-label">
+                            Son Kullanma Tarihi
+                        </label>
+                        <div class="d-flex gap-2">
+                            <select id="tp_expiry_month"
+                                    name="expiry_month"
+                                    class="form-select tp-input"
+                                    autocomplete="cc-exp-month"
+                                    required="required">
+                                <option value="">Ay</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <select id="tp_expiry_year"
+                                    name="expiry_year"
+                                    class="form-select tp-input"
+                                    autocomplete="cc-exp-year"
+                                    required="required">
+                                <option value="">Yil</option>
+                                <t t-foreach="range(2025, 2040)" t-as="year">
+                                    <option t-att-value="year" t-esc="year"/>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="tp_cvv" class="form-label">
+                            CVV / CVC
+                        </label>
+                        <input type="password"
+                               id="tp_cvv"
+                               name="cvv"
+                               class="form-control tp-input"
+                               placeholder="***"
+                               inputmode="numeric"
+                               maxlength="4"
+                               autocomplete="cc-csc"
+                               required="required"/>
+                    </div>
+                </div>
+
+                <!-- ========== Installment Container ========== -->
+                <div id="tp_installment_container"
+                     class="tp-installment-container mb-3"
+                     style="display: none;">
+                    <label class="form-label fw-bold">Taksit Secenekleri</label>
+                    <div id="tp_installment_loading" class="text-center py-3" style="display: none;">
+                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                            <span class="visually-hidden">Yukleniyor...</span>
+                        </div>
+                        <span class="ms-2 text-muted">Taksit secenekleri yukleniyor...</span>
+                    </div>
+                    <div id="tp_installment_options" class="tp-installment-options"></div>
+                    <div id="tp_installment_error"
+                         class="alert alert-warning mt-2"
+                         style="display: none;">
+                        Taksit secenekleri yuklenemedi.
+                    </div>
+                </div>
+
+                <!-- ========== Hidden Fields ========== -->
+                <input type="hidden" id="tp_provider_id" name="provider_id"
+                       t-att-value="provider_id"/>
+                <input type="hidden" id="tp_selected_installment" name="installment_count"
+                       value="1"/>
+                <input type="hidden" id="tp_selected_bank_id" name="bank_id"
+                       value=""/>
+                <input type="hidden" id="tp_card_type" name="card_type"
+                       value=""/>
+                <input type="hidden" id="tp_card_family" name="card_family"
+                       value=""/>
+                <input type="hidden" id="tp_bin_number" name="bin_number"
+                       value=""/>
+                <input type="hidden" id="tp_total_amount" name="total_amount"
+                       value=""/>
+            </div>
+        </div>
+    </template>
+
+    <!-- ============================================================ -->
+    <!-- Inject Inline Form into payment.method_form                   -->
+    <!-- ============================================================ -->
+    <template id="mews_pos_method_form"
+              name="Turkish POS - Odeme Yontemi Formu"
+              inherit_id="payment.method_form">
+        <xpath expr="//div[@name='o_payment_inline_form']" position="inside">
+            <t t-if="provider_sudo.code == 'turkish_pos'">
+                <div class="tp-payment-method-wrapper"
+                     t-att-data-provider-id="provider_sudo.id"
+                     t-att-data-provider-code="provider_sudo.code">
+                    <t t-call="turkish_pos.mews_pos_inline_form">
+                        <t t-set="provider_id" t-value="provider_sudo.id"/>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

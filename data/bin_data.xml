@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- ============================================================
+             BIN (Bank Identification Number) Seed Data
+             Maps the first 6 digits of a card number to the issuing bank
+             and optionally to a card family (e.g., Axess, Bonus, World).
+             Used for real-time bank detection during card input.
+             ============================================================ -->
+
+        <!-- ==================== Akbank BINs (Axess) ==================== -->
+        <record id="bin_akbank_540667" model="turkish.pos.bin">
+            <field name="bin_number">540667</field>
+            <field name="name">Axess</field>
+            <field name="bank_id" ref="bank_akbank"/>
+            <field name="card_family">Axess</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_akbank_546001" model="turkish.pos.bin">
+            <field name="bin_number">546001</field>
+            <field name="name">Axess</field>
+            <field name="bank_id" ref="bank_akbank"/>
+            <field name="card_family">Axess</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_akbank_415514" model="turkish.pos.bin">
+            <field name="bin_number">415514</field>
+            <field name="name">Axess</field>
+            <field name="bank_id" ref="bank_akbank"/>
+            <field name="card_family">Axess</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_akbank_557113" model="turkish.pos.bin">
+            <field name="bin_number">557113</field>
+            <field name="name">Axess</field>
+            <field name="bank_id" ref="bank_akbank"/>
+            <field name="card_family">Axess</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <!-- ==================== Garanti Bankasi BINs (Bonus) ==================== -->
+        <record id="bin_garanti_552608" model="turkish.pos.bin">
+            <field name="bin_number">552608</field>
+            <field name="name">Bonus</field>
+            <field name="bank_id" ref="bank_garanti"/>
+            <field name="card_family">Bonus</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_garanti_415514_bonus" model="turkish.pos.bin">
+            <field name="bin_number">415515</field>
+            <field name="name">Bonus</field>
+            <field name="bank_id" ref="bank_garanti"/>
+            <field name="card_family">Bonus</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_garanti_540130" model="turkish.pos.bin">
+            <field name="bin_number">540130</field>
+            <field name="name">Bonus</field>
+            <field name="bank_id" ref="bank_garanti"/>
+            <field name="card_family">Bonus</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_garanti_543771" model="turkish.pos.bin">
+            <field name="bin_number">543771</field>
+            <field name="name">Bonus</field>
+            <field name="bank_id" ref="bank_garanti"/>
+            <field name="card_family">Bonus</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <!-- ==================== Yapi Kredi BINs (World) ==================== -->
+        <record id="bin_yapikredi_450634" model="turkish.pos.bin">
+            <field name="bin_number">450634</field>
+            <field name="name">World</field>
+            <field name="bank_id" ref="bank_yapikredi"/>
+            <field name="card_family">World</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_yapikredi_557366" model="turkish.pos.bin">
+            <field name="bin_number">557366</field>
+            <field name="name">World</field>
+            <field name="bank_id" ref="bank_yapikredi"/>
+            <field name="card_family">World</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_yapikredi_540110" model="turkish.pos.bin">
+            <field name="bin_number">540110</field>
+            <field name="name">World</field>
+            <field name="bank_id" ref="bank_yapikredi"/>
+            <field name="card_family">World</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_yapikredi_450803" model="turkish.pos.bin">
+            <field name="bin_number">450803</field>
+            <field name="name">World</field>
+            <field name="bank_id" ref="bank_yapikredi"/>
+            <field name="card_family">World</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <!-- ==================== Is Bankasi BINs (Maximum) ==================== -->
+        <record id="bin_isbank_454671" model="turkish.pos.bin">
+            <field name="bin_number">454671</field>
+            <field name="name">Maximum</field>
+            <field name="bank_id" ref="bank_isbank"/>
+            <field name="card_family">Maximum</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_isbank_491182" model="turkish.pos.bin">
+            <field name="bin_number">491182</field>
+            <field name="name">Maximum</field>
+            <field name="bank_id" ref="bank_isbank"/>
+            <field name="card_family">Maximum</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_isbank_454672" model="turkish.pos.bin">
+            <field name="bin_number">454672</field>
+            <field name="name">Maximum</field>
+            <field name="bank_id" ref="bank_isbank"/>
+            <field name="card_family">Maximum</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_isbank_545616" model="turkish.pos.bin">
+            <field name="bin_number">545616</field>
+            <field name="name">Maximum</field>
+            <field name="bank_id" ref="bank_isbank"/>
+            <field name="card_family">Maximum</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <!-- ==================== Ziraat Bankasi BINs ==================== -->
+        <record id="bin_ziraat_440037" model="turkish.pos.bin">
+            <field name="bin_number">440037</field>
+            <field name="name">Bankkart</field>
+            <field name="bank_id" ref="bank_ziraat"/>
+            <field name="card_family">Bankkart</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_ziraat_440038" model="turkish.pos.bin">
+            <field name="bin_number">440038</field>
+            <field name="name">Bankkart</field>
+            <field name="bank_id" ref="bank_ziraat"/>
+            <field name="card_family">Bankkart</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_ziraat_553130" model="turkish.pos.bin">
+            <field name="bin_number">553130</field>
+            <field name="name">Bankkart</field>
+            <field name="bank_id" ref="bank_ziraat"/>
+            <field name="card_family">Bankkart</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <!-- ==================== QNB Finans Bank BINs (CardFinans) ==================== -->
+        <record id="bin_qnb_509091" model="turkish.pos.bin">
+            <field name="bin_number">509091</field>
+            <field name="name">CardFinans</field>
+            <field name="bank_id" ref="bank_qnb_finans"/>
+            <field name="card_family">CardFinans</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_qnb_540024" model="turkish.pos.bin">
+            <field name="bin_number">540024</field>
+            <field name="name">CardFinans</field>
+            <field name="bank_id" ref="bank_qnb_finans"/>
+            <field name="card_family">CardFinans</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_qnb_476628" model="turkish.pos.bin">
+            <field name="bin_number">476628</field>
+            <field name="name">CardFinans</field>
+            <field name="bank_id" ref="bank_qnb_finans"/>
+            <field name="card_family">CardFinans</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <!-- ==================== HalkBank BINs (Paraf) ==================== -->
+        <record id="bin_halkbank_421447" model="turkish.pos.bin">
+            <field name="bin_number">421447</field>
+            <field name="name">Paraf</field>
+            <field name="bank_id" ref="bank_halkbank"/>
+            <field name="card_family">Paraf</field>
+            <field name="card_type">visa</field>
+        </record>
+
+        <record id="bin_halkbank_552096" model="turkish.pos.bin">
+            <field name="bin_number">552096</field>
+            <field name="name">Paraf</field>
+            <field name="bank_id" ref="bank_halkbank"/>
+            <field name="card_family">Paraf</field>
+            <field name="card_type">mastercard</field>
+        </record>
+
+        <record id="bin_halkbank_421448" model="turkish.pos.bin">
+            <field name="bin_number">421448</field>
+            <field name="name">Paraf</field>
+            <field name="bank_id" ref="bank_halkbank"/>
+            <field name="card_family">Paraf</field>
+            <field name="card_type">visa</field>
+        </record>
+
+    </data>
+</odoo>

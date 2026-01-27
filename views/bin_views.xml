@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- BIN (Bank Identification Number) Views                        -->
+    <!-- ============================================================ -->
+
+    <!-- Tree / List View -->
+    <record id="turkish_pos_bin_view_list" model="ir.ui.view">
+        <field name="name">turkish.pos.bin.list</field>
+        <field name="model">turkish.pos.bin</field>
+        <field name="arch" type="xml">
+            <list string="BIN Numaralari">
+                <field name="bin_number" string="BIN Numarasi"/>
+                <field name="name" string="Kart Adi"/>
+                <field name="bank_id" string="Banka"/>
+                <field name="card_type" string="Kart Tipi"/>
+                <field name="card_family" string="Kart Ailesi"/>
+                <field name="active" string="Aktif"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="turkish_pos_bin_view_form" model="ir.ui.view">
+        <field name="name">turkish.pos.bin.form</field>
+        <field name="model">turkish.pos.bin</field>
+        <field name="arch" type="xml">
+            <form string="BIN Kaydi">
+                <sheet>
+                    <group>
+                        <group string="Kart Bilgileri">
+                            <field name="bin_number" string="BIN Numarasi"/>
+                            <field name="name" string="Kart Adi"/>
+                            <field name="bank_id" string="Banka"/>
+                        </group>
+                        <group string="Kart Detaylari">
+                            <field name="card_type" string="Kart Tipi"/>
+                            <field name="card_family" string="Kart Ailesi"/>
+                            <field name="active" string="Aktif"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="turkish_pos_bin_action" model="ir.actions.act_window">
+        <field name="name">BIN Numaralari</field>
+        <field name="res_model">turkish.pos.bin</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Yeni bir BIN kaydi ekleyin
+            </p>
+            <p>
+                Kart numarasinin ilk 6-8 hanesine gore banka ve kart tipi
+                tespiti icin BIN kayitlarini buradan yonetebilirsiniz.
+            </p>
+        </field>
+    </record>
+
+</odoo>

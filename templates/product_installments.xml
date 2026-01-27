@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================
+         Product Page: Installment Options Tab (Taksit Secenekleri)
+         Multi-column comparison table layout (togo.com.tr style).
+         Banks as columns, installment counts as rows.
+         ============================================================ -->
+    <template id="product_installment_tab"
+              name="Product Installment Tab"
+              inherit_id="website_sale.product"
+              priority="50">
+        <xpath expr="//div[hasclass('o_wsale_product_details_content_section_price')]" position="after">
+            <t t-set="matrix" t-value="product._get_installment_matrix_data()"/>
+            <t t-if="matrix and matrix.get('banks')">
+                <div class="tp-installment-section mt-3 mb-4">
+                    <h5 class="tp-installment-title mb-3">
+                        <i class="fa fa-credit-card me-1"/>
+                        Taksit Secenekleri
+                    </h5>
+                    <div class="tp-matrix-wrapper">
+                        <div class="table-responsive">
+                            <table class="table table-bordered tp-matrix-table mb-0">
+                                <thead>
+                                    <tr class="tp-matrix-header">
+                                        <th class="tp-matrix-label-col">Taksit Sayisi</th>
+                                        <t t-foreach="matrix['banks']" t-as="bank">
+                                            <th class="tp-matrix-bank-col text-center">
+                                                <div class="tp-bank-brand-name"
+                                                     t-att-style="'color: %s;' % bank['bank_color']">
+                                                    <t t-out="bank['display_name']"/>
+                                                </div>
+                                            </th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="matrix['rows']" t-as="row">
+                                        <tr class="tp-matrix-row">
+                                            <td class="tp-matrix-label-cell fw-bold">
+                                                <t t-if="row['installment_count'] == 1">
+                                                    Tek Cekim
+                                                </t>
+                                                <t t-else="">
+                                                    <t t-out="row['installment_count']"/> Taksit
+                                                </t>
+                                            </td>
+                                            <t t-foreach="row['cells']" t-as="cell">
+                                                <td class="tp-matrix-cell text-center">
+                                                    <t t-if="cell.get('available')">
+                                                        <div class="tp-cell-monthly">
+                                                            <span t-out="cell['installment_amount']"
+                                                                  t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                                        </div>
+                                                        <div class="tp-cell-total text-muted">
+                                                            <small>
+                                                                Toplam:
+                                                                <span t-out="cell['total_amount']"
+                                                                      t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                                            </small>
+                                                        </div>
+                                                        <t t-if="cell.get('is_campaign')">
+                                                            <span class="badge bg-danger tp-campaign-badge">Kampanya</span>
+                                                        </t>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span class="text-muted">-</span>
+                                                    </t>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- ============================================================
+         Product Listing: Mini Installment Badge
+         Shows a compact badge on the product card in listing pages
+         indicating the lowest installment option available.
+         ============================================================ -->
+    <template id="product_installment_badge"
+              name="Product Installment Badge"
+              inherit_id="website_sale.products_item"
+              priority="50">
+        <xpath expr="//div[hasclass('product_price')]" position="inside">
+            <t t-set="min_amount" t-value="request.env['ir.config_parameter'].sudo().get_param('turkish_pos.min_installment_amount', 100)"/>
+            <t t-if="product.installment_allowed and product.list_price &gt;= float(min_amount)">
+                <t t-set="max_installment" t-value="product._get_max_installment_count()"/>
+                <t t-if="max_installment and max_installment &gt; 1">
+                    <div class="tp-installment-badge mt-1">
+                        <small class="badge bg-info text-dark">
+                            <i class="fa fa-credit-card me-1"/>
+                            <t t-out="max_installment"/> Taksit
+                        </small>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

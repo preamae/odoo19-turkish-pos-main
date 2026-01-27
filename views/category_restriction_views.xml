@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Category Restriction (Kategori Kisitlamasi) Views             -->
+    <!-- ============================================================ -->
+
+    <!-- Tree / List View -->
+    <record id="turkish_pos_category_restriction_view_list" model="ir.ui.view">
+        <field name="name">turkish.pos.category.restriction.list</field>
+        <field name="model">turkish.pos.category.restriction</field>
+        <field name="arch" type="xml">
+            <list string="Kategori Kisitlamalari" editable="bottom">
+                <field name="bank_id" string="Banka"/>
+                <field name="category_id" string="Kategori"/>
+                <field name="max_installment" string="Maks. Taksit"/>
+                <field name="min_installment" string="Min. Taksit"/>
+                <field name="installment_allowed" string="Taksit Izni"/>
+                <field name="blocked_installments" string="Engellenen Taksitler"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="turkish_pos_category_restriction_view_form" model="ir.ui.view">
+        <field name="name">turkish.pos.category.restriction.form</field>
+        <field name="model">turkish.pos.category.restriction</field>
+        <field name="arch" type="xml">
+            <form string="Kategori Kisitlamasi">
+                <sheet>
+                    <group>
+                        <group string="Genel Bilgiler">
+                            <field name="bank_id" string="Banka"/>
+                            <field name="category_id" string="Kategori"/>
+                        </group>
+                        <group string="Taksit Kisitlamalari">
+                            <field name="max_installment" string="Maksimum Taksit"/>
+                            <field name="min_installment" string="Minimum Taksit"/>
+                            <field name="installment_allowed" string="Taksit Izni"/>
+                            <field name="blocked_installments" string="Engellenen Taksitler"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="turkish_pos_category_restriction_action" model="ir.actions.act_window">
+        <field name="name">Kategori Kisitlamalari</field>
+        <field name="res_model">turkish.pos.category.restriction</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Yeni bir kategori kisitlamasi ekleyin
+            </p>
+            <p>
+                Urun kategorilerine gore taksit sayisi sinirlamalarini
+                buradan yonetebilirsiniz.
+            </p>
+        </field>
+    </record>
+
+</odoo>

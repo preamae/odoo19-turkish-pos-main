@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Extends: product.public.category form – Installment settings  -->
+    <!-- ============================================================ -->
+    <record id="product_public_category_form_turkish_pos" model="ir.ui.view">
+        <field name="name">product.public.category.form.turkish.pos</field>
+        <field name="model">product.public.category</field>
+        <field name="inherit_id" ref="website_sale.product_public_category_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Taksit Ayarlari" name="turkish_pos_installment">
+                        <group string="Sanal POS Taksit Ayarlari">
+                            <group>
+                                <field name="installment_allowed"
+                                       string="Taksit Izni"/>
+                                <field name="max_installment_global"
+                                       string="Genel Maksimum Taksit Sayisi"
+                                       invisible="not installment_allowed"/>
+                            </group>
+                        </group>
+                        <group string="Banka Kisitlamalari"
+                               invisible="not installment_allowed">
+                            <field name="installment_restriction_ids"
+                                   string="Taksit Kisitlamalari"
+                                   nolabel="1">
+                                <list editable="bottom">
+                                    <field name="bank_id" string="Banka"/>
+                                    <field name="max_installment" string="Maks. Taksit"/>
+                                    <field name="min_installment" string="Min. Taksit"/>
+                                    <field name="installment_allowed" string="Taksit Izni"/>
+                                    <field name="blocked_installments" string="Engellenen Taksitler"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

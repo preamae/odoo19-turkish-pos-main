@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Transaction (Islem) Views                                     -->
+    <!-- ============================================================ -->
+
+    <!-- Tree / List View -->
+    <record id="turkish_pos_transaction_view_list" model="ir.ui.view">
+        <field name="name">turkish.pos.transaction.list</field>
+        <field name="model">turkish.pos.transaction</field>
+        <field name="arch" type="xml">
+            <list string="Islemler"
+                  decoration-success="state == 'success'"
+                  decoration-info="state == 'pending'"
+                  decoration-warning="state == 'processing'"
+                  decoration-danger="state in ('failed', 'cancelled')"
+                  decoration-muted="state == 'refunded'">
+                <field name="transaction_id" string="Islem No"/>
+                <field name="create_date" string="Tarih"/>
+                <field name="order_id" string="Siparis"/>
+                <field name="bank_id" string="Banka"/>
+                <field name="amount" string="Tutar" sum="Toplam"/>
+                <field name="currency" string="Para Birimi" optional="hide"/>
+                <field name="installment_count" string="Taksit"/>
+                <field name="card_type" string="Kart Tipi" optional="hide"/>
+                <field name="card_number_masked" string="Kart No"/>
+                <field name="state"
+                       string="Durum"
+                       widget="badge"
+                       decoration-success="state == 'success'"
+                       decoration-info="state == 'pending'"
+                       decoration-warning="state == 'processing'"
+                       decoration-danger="state in ('failed', 'cancelled')"
+                       decoration-muted="state == 'refunded'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="turkish_pos_transaction_view_form" model="ir.ui.view">
+        <field name="name">turkish.pos.transaction.form</field>
+        <field name="model">turkish.pos.transaction</field>
+        <field name="arch" type="xml">
+            <form string="Islem Detayi" create="false">
+                <header>
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="pending,processing,success"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="transaction_id" string="Islem Numarasi"/>
+                        <h1>
+                            <field name="transaction_id" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Siparis Bilgileri">
+                            <field name="order_id" string="Siparis"/>
+                            <field name="payment_transaction_id" string="Odeme Islemi"/>
+                        </group>
+                        <group string="Odeme Bilgileri">
+                            <field name="amount" string="Tutar"/>
+                            <field name="currency" string="Para Birimi"/>
+                            <field name="installment_count" string="Taksit Sayisi"/>
+                            <field name="interest_amount" string="Faiz Tutari"/>
+                            <field name="total_amount" string="Toplam Tutar"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Kart Bilgileri">
+                            <field name="bank_id" string="Banka"/>
+                            <field name="card_number_masked" string="Maskeli Kart No"/>
+                            <field name="card_type" string="Kart Tipi"/>
+                            <field name="card_holder_name" string="Kart Sahibi"/>
+                        </group>
+                        <group string="Saglayici Bilgileri">
+                            <field name="gateway_id" string="Saglayici"/>
+                            <field name="is_3d_secure" string="3D Secure"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Islem Detaylari" name="details">
+                            <group>
+                                <group>
+                                    <field name="create_date" string="Olusturma Tarihi"/>
+                                    <field name="write_date" string="Guncelleme Tarihi"/>
+                                </group>
+                                <group>
+                                    <field name="ip_address" string="IP Adresi"/>
+                                    <field name="user_agent" string="Tarayici Bilgisi"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Banka Yaniti" name="bank_response">
+                            <group>
+                                <field name="bank_response_code" string="Banka Yanit Kodu"/>
+                                <field name="bank_response_message" string="Banka Yanit Mesaji"/>
+                                <field name="bank_order_id" string="Banka Siparis No"/>
+                                <field name="auth_code" string="Otorizasyon Kodu"/>
+                                <field name="rrn" string="RRN (Referans No)"/>
+                                <field name="host_ref_num" string="Host Referans No"/>
+                            </group>
+                            <group string="Ham Veri">
+                                <field name="request_data" string="Istek (Ham)" widget="code"/>
+                                <field name="response_data" string="Yanit (Ham)" widget="code"/>
+                            </group>
+                        </page>
+                        <page string="3D Secure" name="threed_secure">
+                            <group>
+                                <group>
+                                    <field name="threed_status" string="3D Durum"/>
+                                    <field name="md_status" string="MD Status"/>
+                                </group>
+                                <group>
+                                    <field name="eci" string="ECI"/>
+                                    <field name="cavv" string="CAVV"/>
+                                    <field name="xid" string="XID"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Hata Bilgileri" name="error_info"
+                              invisible="state not in ('failed', 'cancelled')">
+                            <group>
+                                <field name="error_code" string="Hata Kodu"/>
+                                <field name="error_message" string="Hata Mesaji"/>
+                            </group>
+                        </page>
+                        <page string="Iade Islemleri" name="refunds">
+                            <group>
+                                <field name="refunded_amount" string="Iade Edilen Tutar"/>
+                                <field name="remaining_refundable" string="Iade Edilebilir Tutar"/>
+                            </group>
+                            <field name="refund_ids" string="Iade Kayitlari">
+                                <list>
+                                    <field name="create_date" string="Iade Tarihi"/>
+                                    <field name="amount" string="Iade Tutari"/>
+                                    <field name="reason" string="Neden"/>
+                                    <field name="state" string="Durum" widget="badge"/>
+                                    <field name="bank_response_code" string="Yanit Kodu"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="turkish_pos_transaction_action" model="ir.actions.act_window">
+        <field name="name">Islemler</field>
+        <field name="res_model">turkish.pos.transaction</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Henuz bir islem bulunmuyor
+            </p>
+            <p>
+                Sanal POS uzerinden yapilan odeme islemleri burada
+                listelenir. Tum islem detaylarina buradan ulasabilirsiniz.
+            </p>
+        </field>
+    </record>
+
+</odoo>

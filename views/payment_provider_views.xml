@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Extends: payment.provider form – Turkish POS settings         -->
+    <!-- ============================================================ -->
+    <record id="payment_provider_form_turkish_pos" model="ir.ui.view">
+        <field name="name">payment.provider.form.turkish.pos</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='provider_credentials']" position="after">
+                <group name="turkish_pos_settings"
+                       string="Sanal POS Ayarlari"
+                       invisible="code != 'turkish_pos'">
+                    <group string="Banka Ayarlari">
+                        <field name="turkish_pos_bank_ids"
+                               string="Desteklenen Bankalar"
+                               widget="many2many_tags"
+                               placeholder="Banka seciniz..."/>
+                        <field name="turkish_pos_default_bank_id"
+                               string="Varsayilan Banka"/>
+                    </group>
+                    <group string="Taksit Ayarlari">
+                        <field name="turkish_pos_show_installments"
+                               string="Taksit Seceneklerini Goster"/>
+                        <field name="turkish_pos_default_installment"
+                               string="Varsayilan Taksit Sayisi"/>
+                        <field name="turkish_pos_max_installment"
+                               string="Maksimum Taksit Sayisi"/>
+                        <field name="turkish_pos_min_installment_amount"
+                               string="Minimum Taksit Tutari"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

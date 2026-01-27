@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Main Menu Structure – Turkish Virtual POS                     -->
+    <!-- ============================================================ -->
+
+    <!-- Root Menu -->
+    <menuitem id="turkish_pos_menu_root"
+              name="Turkish POS"
+              web_icon="turkish_pos,static/description/icon.png"
+              sequence="90"/>
+
+    <!-- ======================== -->
+    <!-- Configuration Sub-Menu   -->
+    <!-- ======================== -->
+    <menuitem id="turkish_pos_menu_configuration"
+              name="Yapilandirma"
+              parent="turkish_pos_menu_root"
+              sequence="10"/>
+
+    <!-- Gateways -->
+    <menuitem id="turkish_pos_menu_gateway"
+              name="Saglayicilar"
+              parent="turkish_pos_menu_configuration"
+              action="turkish_pos_gateway_action"
+              sequence="10"/>
+
+    <!-- Banks -->
+    <menuitem id="turkish_pos_menu_bank"
+              name="Bankalar"
+              parent="turkish_pos_menu_configuration"
+              action="turkish_pos_bank_action"
+              sequence="20"/>
+
+    <!-- BIN -->
+    <menuitem id="turkish_pos_menu_bin"
+              name="BIN Numaralari"
+              parent="turkish_pos_menu_configuration"
+              action="turkish_pos_bin_action"
+              sequence="30"/>
+
+    <!-- Installment Configurations -->
+    <menuitem id="turkish_pos_menu_installment_config"
+              name="Taksit Yapilandirmalari"
+              parent="turkish_pos_menu_configuration"
+              action="turkish_pos_installment_config_action"
+              sequence="40"/>
+
+    <!-- Category Restrictions -->
+    <menuitem id="turkish_pos_menu_category_restriction"
+              name="Kategori Kisitlamalari"
+              parent="turkish_pos_menu_configuration"
+              action="turkish_pos_category_restriction_action"
+              sequence="50"/>
+
+    <!-- ======================== -->
+    <!-- Transactions Sub-Menu    -->
+    <!-- ======================== -->
+    <menuitem id="turkish_pos_menu_transactions"
+              name="Islemler"
+              parent="turkish_pos_menu_root"
+              action="turkish_pos_transaction_action"
+              sequence="20"/>
+
+</odoo>

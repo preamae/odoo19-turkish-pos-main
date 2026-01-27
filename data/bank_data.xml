@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- ============================================================
+             Turkish Bank Seed Data
+             Full official names, SWIFT codes, card brands (Markalar),
+             and gateway mappings matching the admin panel layout.
+             ============================================================ -->
+
+        <!-- Ziraat Bankasi -->
+        <record id="bank_ziraat" model="turkish.pos.bank">
+            <field name="name">Turkiye Cumhuriyeti Ziraat Bankasi A.S.</field>
+            <field name="code">TCZBTR2A</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Bankart</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- HalkBank -->
+        <record id="bank_halkbank" model="turkish.pos.bank">
+            <field name="name">HalkBank A.S.</field>
+            <field name="code">TRHBTR2A</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Bank24, Param</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Vakifbank -->
+        <record id="bank_vakifbank" model="turkish.pos.bank">
+            <field name="name">Turkiye Vakiflar Bankasi T.A.O.</field>
+            <field name="code">TVBATR2A</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">World</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_payflex_mpi')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Akbank -->
+        <record id="bank_akbank" model="turkish.pos.bank">
+            <field name="name">Akbank T.A.S.</field>
+            <field name="code">AKBKTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Wings, Neo, Tosla, Axess</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_akbank_pos')),
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Sekerbank -->
+        <record id="bank_sekerbank" model="turkish.pos.bank">
+            <field name="name">Sekerbank T.A.S.</field>
+            <field name="code">SEKETR2A</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Bonus, Hasat Kart, Ureten Kart</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Turk Ticaret Bankasi -->
+        <record id="bank_turkticaret" model="turkish.pos.bank">
+            <field name="name">Turk Ticaret Bankasi A.S.</field>
+            <field name="code">TTANTRISXXX</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands"></field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_param')),
+            ]"/>
+        </record>
+
+        <!-- Garanti BBVA -->
+        <record id="bank_garanti" model="turkish.pos.bank">
+            <field name="name">Turkiye Garanti Bankasi A.S.</field>
+            <field name="code">TGBATRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Miles&amp;Smiles, Tosla, Bonus, Shop&amp;Fly</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_garanti_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Is Bankasi -->
+        <record id="bank_isbank" model="turkish.pos.bank">
+            <field name="name">Turkiye Is Bankasi A.S.</field>
+            <field name="code">ISBKTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Maximum</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_payflex_mpi')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Yapi Kredi -->
+        <record id="bank_yapikredi" model="turkish.pos.bank">
+            <field name="name">Yapi ve Kredi Bankasi A.S.</field>
+            <field name="code">YAPITRISXXX</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">World</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_posnet')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Citibank -->
+        <record id="bank_citibank" model="turkish.pos.bank">
+            <field name="name">Citibank A.S.</field>
+            <field name="code">CITITRIX</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands"></field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- ING Bank -->
+        <record id="bank_ing" model="turkish.pos.bank">
+            <field name="name">ING Bank A.S.</field>
+            <field name="code">INGBTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands"></field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Adabank -->
+        <record id="bank_adabank" model="turkish.pos.bank">
+            <field name="name">Adabank A.S.</field>
+            <field name="code">ADABTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands"></field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_param')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Fibabanka -->
+        <record id="bank_fibabanka" model="turkish.pos.bank">
+            <field name="name">Fibabanka A.S.</field>
+            <field name="code">FBHLTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Bonus</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- ICBC Turkey Bank -->
+        <record id="bank_icbc" model="turkish.pos.bank">
+            <field name="name">ICBC Turkey Bank A.S.</field>
+            <field name="code">ICBKTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Bonus</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_param')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- QNB Finans Bank -->
+        <record id="bank_qnb_finans" model="turkish.pos.bank">
+            <field name="name">QNB Finans Bank A.S.</field>
+            <field name="code">FNNBTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">CardFinans</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_qnbpay')),
+                (4, ref('gateway_payfor')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- HSBC -->
+        <record id="bank_hsbc" model="turkish.pos.bank">
+            <field name="name">HSBC Bank A.S.</field>
+            <field name="code">HSBCTRIX</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Advantage</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Alternatifbank -->
+        <record id="bank_alternatifbank" model="turkish.pos.bank">
+            <field name="name">Alternatifbank A.S.</field>
+            <field name="code">ALFBTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands"></field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_param')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Denizbank -->
+        <record id="bank_denizbank" model="turkish.pos.bank">
+            <field name="name">Denizbank A.S.</field>
+            <field name="code">DENITRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Bonus</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_interpos')),
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Anadolubank -->
+        <record id="bank_anadolubank" model="turkish.pos.bank">
+            <field name="name">Anadolubank A.S.</field>
+            <field name="code">ANDLTRIS</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">World</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- TEB -->
+        <record id="bank_teb" model="turkish.pos.bank">
+            <field name="name">Turk Ekonomi Bankasi A.S.</field>
+            <field name="code">TEBUTR2A</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">Bonus</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_estv3_pos')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+        <!-- Finansbank (legacy name) -->
+        <record id="bank_finansbank" model="turkish.pos.bank">
+            <field name="name">Finansbank A.S.</field>
+            <field name="code">FNNBTRI2</field>
+            <field name="country">Turkiye</field>
+            <field name="card_brands">CardFinans</field>
+            <field name="active">True</field>
+            <field name="gateway_ids" eval="[
+                (4, ref('gateway_payfor')),
+                (4, ref('gateway_qnbpay')),
+                (4, ref('gateway_param')),
+                (4, ref('gateway_tosla')),
+                (4, ref('gateway_iyzico')),
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

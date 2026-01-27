@@ -1,0 +1,309 @@
+/* ==============================================================
+   Turkish POS - Card Preview Styles
+   Visual credit card preview with gradient background, chip,
+   card number, holder name, and expiry display.
+   ============================================================== */
+
+/* Card container */
+.tp-card-preview {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 1.586 / 1; /* Standard card ratio */
+    border-radius: 14px;
+    padding: 1.5rem;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    margin: 0 auto 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Default gradient */
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.tp-card-preview:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Brand-specific gradients */
+.tp-card-preview[data-card-brand="visa"] {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+}
+
+.tp-card-preview[data-card-brand="mastercard"] {
+    background: linear-gradient(135deg, #b71c1c 0%, #c62828 50%, #d32f2f 100%);
+}
+
+.tp-card-preview[data-card-brand="troy"] {
+    background: linear-gradient(135deg, #004d40 0%, #00695c 50%, #00897b 100%);
+}
+
+/* Decorative overlay pattern */
+.tp-card-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.tp-card-preview::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+/* Top row: chip + brand */
+.tp-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+}
+
+/* Chip */
+.tp-card-chip {
+    width: 45px;
+    height: 34px;
+    background: linear-gradient(135deg, #e8d48b 0%, #c7a84e 50%, #e8d48b 100%);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.tp-card-chip::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    right: 3px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.tp-card-chip::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 50%;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Card brand icon area */
+.tp-card-brand-icon {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+.tp-card-brand-icon[data-brand="visa"]::after {
+    content: 'VISA';
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 0.05em;
+}
+
+.tp-card-brand-icon[data-brand="mastercard"]::after {
+    content: 'Mastercard';
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.tp-card-brand-icon[data-brand="troy"]::after {
+    content: 'TROY';
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+/* Card number preview */
+.tp-preview-number {
+    font-size: 1.35rem;
+    letter-spacing: 0.15em;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.25rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    word-spacing: 0.3em;
+}
+
+/* Bottom row: name + expiry */
+.tp-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 1;
+}
+
+/* Name preview */
+.tp-card-name-group {
+    flex: 1;
+    min-width: 0;
+}
+
+.tp-card-label {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 0.15rem;
+    font-family: Arial, sans-serif;
+}
+
+.tp-preview-name {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+}
+
+/* Expiry preview */
+.tp-card-expiry-group {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.tp-preview-expiry {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+}
+
+/* Contactless indicator */
+.tp-card-contactless {
+    position: absolute;
+    top: 1rem;
+    right: 5rem;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.tp-card-contactless svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+}
+
+/* Card flip (optional back) */
+.tp-card-wrapper {
+    perspective: 1000px;
+}
+
+.tp-card-inner {
+    position: relative;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+.tp-card-wrapper.flipped .tp-card-inner {
+    transform: rotateY(180deg);
+}
+
+.tp-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    padding: 0;
+    overflow: hidden;
+}
+
+.tp-card-back .tp-magnetic-stripe {
+    width: 100%;
+    height: 42px;
+    background: #1a1a1a;
+    margin-top: 1.5rem;
+}
+
+.tp-card-back .tp-cvv-strip {
+    margin: 1rem 1.5rem;
+    background: #f5f5f5;
+    height: 36px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1rem;
+    color: #333;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Responsive card */
+@media (max-width: 576px) {
+    .tp-card-preview {
+        max-width: 320px;
+        padding: 1.2rem;
+    }
+
+    .tp-preview-number {
+        font-size: 1.1rem;
+        letter-spacing: 0.1em;
+    }
+
+    .tp-preview-name,
+    .tp-preview-expiry {
+        font-size: 0.8rem;
+    }
+
+    .tp-card-chip {
+        width: 38px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tp-card-preview {
+        max-width: 280px;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .tp-preview-number {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .tp-card-top {
+        margin-bottom: 1rem;
+    }
+}

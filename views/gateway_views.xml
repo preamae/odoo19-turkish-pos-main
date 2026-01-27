@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Gateway (Saglayici) Views                                     -->
+    <!-- ============================================================ -->
+
+    <!-- Tree / List View -->
+    <record id="turkish_pos_gateway_view_list" model="ir.ui.view">
+        <field name="name">turkish.pos.gateway.list</field>
+        <field name="model">turkish.pos.gateway</field>
+        <field name="arch" type="xml">
+            <list string="Saglayicilar" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name" string="Saglayici Adi"/>
+                <field name="code" string="Kod"/>
+                <field name="payment_model" string="Odeme Modeli"/>
+                <field name="bank_count" string="Banka Sayisi"/>
+                <field name="supports_all_banks"
+                       string="Tum Bankalar"
+                       widget="boolean_toggle"/>
+                <field name="active"
+                       string="Aktif"
+                       widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="turkish_pos_gateway_view_form" model="ir.ui.view">
+        <field name="name">turkish.pos.gateway.form</field>
+        <field name="model">turkish.pos.gateway</field>
+        <field name="arch" type="xml">
+            <form string="Saglayici">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Saglayici Adi"/>
+                        <h1>
+                            <field name="name" placeholder="Saglayici adi giriniz..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Genel Bilgiler">
+                            <field name="code" string="Kod"/>
+                            <field name="sequence" string="Sira"/>
+                            <field name="supports_all_banks" string="Tum Bankalari Destekler"/>
+                            <field name="bank_count" string="Banka Sayisi"/>
+                        </group>
+                        <group string="Entegrasyon Ayarlari">
+                            <field name="payment_model" string="Odeme Modeli"/>
+                            <field name="environment"
+                                   string="Ortam"
+                                   widget="radio"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Aciklama" name="description">
+                            <field name="description"
+                                   string="Aciklama"
+                                   placeholder="Saglayici hakkinda aciklama giriniz..."/>
+                        </page>
+                        <page string="Bankalar" name="banks">
+                            <field name="bank_ids" string="Desteklenen Bankalar" readonly="1">
+                                <list>
+                                    <field name="name" string="Banka Adi"/>
+                                    <field name="code" string="Kod"/>
+                                    <field name="swift_code" string="SWIFT Kodu"/>
+                                    <field name="active" string="Aktif"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Kimlik Bilgileri" name="credentials">
+                            <field name="credentials"
+                                   string="Kimlik Bilgileri"
+                                   widget="code"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="turkish_pos_gateway_action" model="ir.actions.act_window">
+        <field name="name">Saglayicilar (Gateways)</field>
+        <field name="res_model">turkish.pos.gateway</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Yeni bir odeme saglayicisi ekleyin
+            </p>
+            <p>
+                Param, Tosla, iyzico, QNBPay gibi Turk odeme saglayicilarini
+                buradan yonetebilirsiniz.
+            </p>
+        </field>
+    </record>
+
+</odoo>

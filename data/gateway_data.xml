@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ============================================================
+             Payment Gateway Seed Data
+             Defines all supported Turkish payment gateway integrations.
+             Gateways marked supports_all_banks=True work as aggregators
+             that can process payments for any bank's cards.
+             ============================================================ -->
+
+        <!-- Param (Turk Elektronik Para) - Aggregator -->
+        <record id="gateway_param" model="turkish.pos.gateway">
+            <field name="name">Param</field>
+            <field name="code">param</field>
+            <field name="sequence">10</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="True"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "clientCode": "10738",
+    "username": "Test",
+    "password": "Test",
+    "guid": "0c13d406-873b-403b-9c09-a5766840d98c",
+    "test_endpoint": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_prod.asmx",
+    "prod_endpoint": "https://dmz.param.com.tr/turkpos.ws/service_turkpos_prod.asmx"
+}</field>
+            <field name="description">Param (Turk Elektronik Para) - Tum bankalari destekleyen odeme gecidi.</field>
+        </record>
+
+        <!-- Tosla (Akbank Aggregator) -->
+        <record id="gateway_tosla" model="turkish.pos.gateway">
+            <field name="name">Tosla</field>
+            <field name="code">tosla</field>
+            <field name="sequence">20</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="True"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "test_endpoint": "https://preprod.tosla.com/api/Payment",
+    "prod_endpoint": "https://tosla.com/api/Payment"
+}</field>
+            <field name="description">Tosla (Akbank Fintek) - Tum bankalari destekleyen odeme gecidi.</field>
+        </record>
+
+        <!-- iyzico (Payment Aggregator) -->
+        <record id="gateway_iyzico" model="turkish.pos.gateway">
+            <field name="name">iyzico</field>
+            <field name="code">iyzico</field>
+            <field name="sequence">30</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="True"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "apiKey": "",
+    "secretKey": "",
+    "test_endpoint": "https://sandbox-api.iyzipay.com",
+    "prod_endpoint": "https://api.iyzipay.com"
+}</field>
+            <field name="description">iyzico - Tum bankalari destekleyen odeme gecidi.</field>
+        </record>
+
+        <!-- QNBPay (QNB Finansbank Gateway) -->
+        <record id="gateway_qnbpay" model="turkish.pos.gateway">
+            <field name="name">QNBPay</field>
+            <field name="code">qnbpay</field>
+            <field name="sequence">40</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "test_endpoint": "https://vpostest.qnbfinansbank.com/Gateway/Default.aspx",
+    "prod_endpoint": "https://vpos.qnbfinansbank.com/Gateway/Default.aspx"
+}</field>
+            <field name="description">QNBPay - QNB Finansbank odeme gecidi.</field>
+        </record>
+
+        <!-- Akbank POS (Direct Bank Integration) -->
+        <record id="gateway_akbank_pos" model="turkish.pos.gateway">
+            <field name="name">Akbank POS</field>
+            <field name="code">akbank_pos</field>
+            <field name="sequence">50</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "test_endpoint": "https://virtualpospaymentgateway.akbank.com/payhosting",
+    "prod_endpoint": "https://virtualpospaymentgateway.akbank.com/payhosting"
+}</field>
+            <field name="description">Akbank dogrudan sanal POS entegrasyonu.</field>
+        </record>
+
+        <!-- EST V3 POS (Asseco / NestPay) -->
+        <record id="gateway_estv3_pos" model="turkish.pos.gateway">
+            <field name="name">EST V3 POS</field>
+            <field name="code">estv3_pos</field>
+            <field name="sequence">60</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "test_endpoint": "https://entegrasyon.asseco-see.com.tr/fim/api",
+    "prod_endpoint": "https://sanalpos.est.com.tr/fim/api"
+}</field>
+            <field name="description">EST V3 (Asseco/Payten) - IsBank, Akbank, Finansbank, HalkBank icin.</field>
+        </record>
+
+        <!-- Garanti POS (GVP) -->
+        <record id="gateway_garanti_pos" model="turkish.pos.gateway">
+            <field name="name">Garanti POS</field>
+            <field name="code">garanti_pos</field>
+            <field name="sequence">70</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "merchant_id": "7000679",
+    "terminal_id": "30691297",
+    "username": "PROVAUT",
+    "password": "123qweASD",
+    "store_key": "12345678",
+    "test_endpoint": "https://sanalposprovtest.garantibbva.com.tr/VPServlet",
+    "prod_endpoint": "https://sanalposprov.garantibbva.com.tr/VPServlet",
+    "test_3d_url": "https://sanalposprovtest.garantibbva.com.tr/servlet/gt3dengine",
+    "prod_3d_url": "https://sanalposprov.garantibbva.com.tr/servlet/gt3dengine"
+}</field>
+            <field name="description">Garanti BBVA dogrudan sanal POS (GVP).</field>
+        </record>
+
+        <!-- PosNet (Yapi Kredi) -->
+        <record id="gateway_posnet" model="turkish.pos.gateway">
+            <field name="name">PosNet</field>
+            <field name="code">posnet</field>
+            <field name="sequence">80</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "merchant_id": "6706598320",
+    "terminal_id": "67005551",
+    "store_key": "10,10,10,10,10,10,10,10",
+    "test_endpoint": "https://setmpos.ykb.com/PosnetWebService/XML",
+    "prod_endpoint": "https://posnet.yapikredi.com.tr/PosnetWebService/XML"
+}</field>
+            <field name="description">PosNet - Yapi Kredi Bankasi sanal POS sistemi.</field>
+        </record>
+
+        <!-- PayFor (Finansbank / QNB) -->
+        <record id="gateway_payfor" model="turkish.pos.gateway">
+            <field name="name">PayFor</field>
+            <field name="code">payfor</field>
+            <field name="sequence">90</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "test_endpoint": "https://vpostest.qnbfinansbank.com/Gateway/Default.aspx",
+    "prod_endpoint": "https://vpos.qnbfinansbank.com/Gateway/Default.aspx"
+}</field>
+            <field name="description">PayFor - Finansbank / QNB eski odeme sistemi.</field>
+        </record>
+
+        <!-- PayFlex MPI (Vakifbank, Ziraat) -->
+        <record id="gateway_payflex_mpi" model="turkish.pos.gateway">
+            <field name="name">PayFlex MPI</field>
+            <field name="code">payflex_mpi</field>
+            <field name="sequence">100</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "test_endpoint": "https://onlineodemetest.vakifbank.com.tr/CommonPaymentPage/CommonPaymentPage",
+    "prod_endpoint": "https://onlineodeme.vakifbank.com.tr/CommonPaymentPage/CommonPaymentPage"
+}</field>
+            <field name="description">PayFlex MPI - Vakifbank ve Ziraat Bankasi icin.</field>
+        </record>
+
+        <!-- InterPos (Denizbank) -->
+        <record id="gateway_interpos" model="turkish.pos.gateway">
+            <field name="name">InterPos</field>
+            <field name="code">interpos</field>
+            <field name="sequence">110</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "test_endpoint": "https://inter-vpos.com.tr/mpi/Default.aspx",
+    "prod_endpoint": "https://inter-vpos.com.tr/mpi/Default.aspx"
+}</field>
+            <field name="description">InterPos - Denizbank sanal POS sistemi.</field>
+        </record>
+
+        <!-- Kuveyt POS (Kuveyt Turk) -->
+        <record id="gateway_kuveyt_pos" model="turkish.pos.gateway">
+            <field name="name">Kuveyt POS</field>
+            <field name="code">kuveyt_pos</field>
+            <field name="sequence">120</field>
+            <field name="active" eval="True"/>
+            <field name="supports_all_banks" eval="False"/>
+            <field name="payment_model">3d_secure</field>
+            <field name="environment">test</field>
+            <field name="credentials">{
+    "test_endpoint": "https://boatest.kuveytturk.com.tr/boa.virtualPos498Service/Home/ThreeDModelPayGate",
+    "prod_endpoint": "https://boa.kuveytturk.com.tr/sanalposService/Home/ThreeDModelPayGate"
+}</field>
+            <field name="description">Kuveyt POS - Kuveyt Turk Katilim Bankasi.</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Installment Configuration (Taksit Yapilandirmasi) Views       -->
+    <!-- ============================================================ -->
+
+    <!-- Tree / List View -->
+    <record id="turkish_pos_installment_config_view_list" model="ir.ui.view">
+        <field name="name">turkish.pos.installment.config.list</field>
+        <field name="model">turkish.pos.installment.config</field>
+        <field name="arch" type="xml">
+            <list string="Taksit Yapilandirmalari" editable="bottom">
+                <field name="bank_id" string="Banka"/>
+                <field name="installment_count" string="Taksit Sayisi"/>
+                <field name="interest_rate" string="Faiz Orani (%)"/>
+                <field name="commission_rate" string="Komisyon Orani (%)"/>
+                <field name="min_amount" string="Minimum Tutar"/>
+                <field name="campaign_active" string="Kampanya Aktif"/>
+                <field name="active" string="Aktif"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="turkish_pos_installment_config_view_form" model="ir.ui.view">
+        <field name="name">turkish.pos.installment.config.form</field>
+        <field name="model">turkish.pos.installment.config</field>
+        <field name="arch" type="xml">
+            <form string="Taksit Yapilandirmasi">
+                <sheet>
+                    <group>
+                        <group string="Genel Bilgiler">
+                            <field name="bank_id" string="Banka"/>
+                            <field name="installment_count" string="Taksit Sayisi"/>
+                            <field name="min_amount" string="Minimum Tutar"/>
+                        </group>
+                        <group string="Oran Bilgileri">
+                            <field name="interest_rate" string="Faiz Orani (%)"/>
+                            <field name="commission_rate" string="Komisyon Orani (%)"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="campaign_active" string="Kampanya Aktif"/>
+                            <field name="active" string="Aktif"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="turkish_pos_installment_config_action" model="ir.actions.act_window">
+        <field name="name">Taksit Yapilandirmalari</field>
+        <field name="res_model">turkish.pos.installment.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Yeni bir taksit yapilandirmasi ekleyin
+            </p>
+            <p>
+                Banka bazli taksit sayisi, faiz orani ve komisyon oranlarini
+                buradan yonetebilirsiniz.
+            </p>
+        </field>
+    </record>
+
+</odoo>
