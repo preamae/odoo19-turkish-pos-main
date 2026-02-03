@@ -6,156 +6,51 @@ from odoo import api, fields, models, _
 _logger = logging.getLogger(__name__)
 
 
-class PaymentMethodCash(models.Model):
-    """Cash Payment Method.
-    
-    Simple cash payment implementation for testing and demo purposes.
-    No gateway integration required.
-    """
-    
-    _name = 'payment.method.cash'
-    _description = 'Cash Payment Method'
-    _inherit = 'payment.method'
-    _inherits = {}
-    
-    # This is a test/demo model - in production, you would configure
-    # payment.method records via data files rather than creating separate models
-    
-
-class PaymentMethodCreditCard(models.Model):
-    """Credit Card Payment Method.
-    
-    Credit card payment with installment and 3D Secure support.
-    Integrates with Turkish POS banks for installment calculation.
-    """
-    
-    _name = 'payment.method.credit.card'
-    _description = 'Credit Card Payment Method'
-    _inherit = 'payment.method'
-    _inherits = {}
-    
-    # Additional card-specific fields
-    accepted_card_types = fields.Selection(
-        selection=[
-            ('all', 'All Cards'),
-            ('visa', 'Visa Only'),
-            ('mastercard', 'Mastercard Only'),
-            ('troy', 'Troy Only'),
-        ],
-        string='Accepted Card Types',
-        default='all',
-        help='Types of cards accepted by this payment method'
-    )
-    
-    enable_bin_detection = fields.Boolean(
-        string='Enable BIN Detection',
-        default=True,
-        help='Automatically detect bank from card BIN number'
-    )
-    
-    # Override to set defaults for credit card
-    @api.model
-    def create(self, vals):
-        """Set defaults for credit card payment method."""
-        if 'payment_type' not in vals:
-            vals['payment_type'] = 'card'
-        if 'supports_installments' not in vals:
-            vals['supports_installments'] = True
-        if 'requires_3d_secure' not in vals:
-            vals['requires_3d_secure'] = True
-        return super().create(vals)
-
-
-class PaymentMethodBankTransfer(models.Model):
-    """Bank Transfer Payment Method.
-    
-    Bank transfer/wire payment method for larger transactions.
-    Requires manual confirmation.
-    """
-    
-    _name = 'payment.method.bank.transfer'
-    _description = 'Bank Transfer Payment Method'
-    _inherit = 'payment.method'
-    _inherits = {}
-    
-    # Bank account details
-    bank_account_number = fields.Char(
-        string='Bank Account Number',
-        help='Bank account number for receiving transfers'
-    )
-    
-    iban = fields.Char(
-        string='IBAN',
-        help='International Bank Account Number'
-    )
-    
-    swift_code = fields.Char(
-        string='SWIFT/BIC Code',
-        help='Bank SWIFT/BIC code'
-    )
-    
-    bank_name = fields.Char(
-        string='Bank Name',
-        help='Name of the bank'
-    )
-    
-    bank_branch = fields.Char(
-        string='Bank Branch',
-        help='Bank branch information'
-    )
-    
-    account_holder = fields.Char(
-        string='Account Holder',
-        help='Name of the account holder'
-    )
-    
-    transfer_instructions = fields.Text(
-        string='Transfer Instructions',
-        translate=True,
-        help='Instructions for customers on how to make the bank transfer'
-    )
-    
-    confirmation_required = fields.Boolean(
-        string='Confirmation Required',
-        default=True,
-        help='Payment must be manually confirmed after transfer'
-    )
-    
-    auto_confirm_after_days = fields.Integer(
-        string='Auto-Confirm After Days',
-        default=0,
-        help='Automatically confirm payment after N days (0 = disabled)'
-    )
-    
-    # Override to set defaults for bank transfer
-    @api.model
-    def create(self, vals):
-        """Set defaults for bank transfer payment method."""
-        if 'payment_type' not in vals:
-            vals['payment_type'] = 'bank_transfer'
-        if 'supports_installments' not in vals:
-            vals['supports_installments'] = False
-        if 'requires_3d_secure' not in vals:
-            vals['requires_3d_secure'] = False
-        return super().create(vals)
-    
-    def get_transfer_details(self):
-        """Get formatted bank transfer details for customer.
-        
-        Returns:
-            dict: Bank transfer information
-        """
-        self.ensure_one()
-        
-        return {
-            'bank_name': self.bank_name,
-            'account_holder': self.account_holder,
-            'account_number': self.bank_account_number,
-            'iban': self.iban,
-            'swift': self.swift_code,
-            'branch': self.bank_branch,
-            'instructions': self.transfer_instructions,
-        }
+# =============================================================================
+# PAYMENT METHOD EXAMPLES AND DOCUMENTATION
+# =============================================================================
+#
+# This file previously contained example model classes (PaymentMethodCash,
+# PaymentMethodCreditCard, PaymentMethodBankTransfer) that inherited from
+# payment.method. These have been REMOVED because:
+#
+# 1. They caused Many2many field conflicts (all inherited turkish_pos_bank_ids
+#    field with the same relation table)
+# 2. They are not needed - payment methods should be created as records of
+#    payment.method model, not as separate model classes
+# 3. The data file (abstract_payment_data.xml) already creates the necessary
+#    payment method records
+#
+# HOW TO CREATE PAYMENT METHODS:
+# ===============================
+#
+# Method 1: Via Data Files (Recommended)
+# ---------------------------------------
+# Create records in abstract_payment_data.xml:
+#
+#   <record id="payment_method_cash" model="payment.method">
+#       <field name="name">Cash Payment</field>
+#       <field name="code">cash</field>
+#       <field name="payment_type">cash</field>
+#       ...
+#   </record>
+#
+# Method 2: Via Python Code
+# --------------------------
+# Use the helper function below or create directly:
+#
+#   cash_method = env['payment.method'].create({
+#       'name': 'Cash Payment',
+#       'code': 'cash',
+#       'payment_type': 'cash',
+#       ...
+#   })
+#
+# Method 3: Via Odoo UI
+# ---------------------
+# Navigate to: Abstract Payment > Payment Methods > Create
+#
+# =============================================================================
 
 
 # =============================================================================
