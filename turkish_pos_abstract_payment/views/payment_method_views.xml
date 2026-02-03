@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Payment Method Tree View -->
+    <!-- Payment Method List View -->
     <record id="view_payment_method_tree" model="ir.ui.view">
         <field name="name">payment.method.tree</field>
         <field name="model">payment.method</field>
         <field name="arch" type="xml">
-            <tree string="Payment Methods">
+            <list string="Payment Methods">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="code"/>
@@ -13,7 +13,7 @@
                 <field name="supports_installments"/>
                 <field name="active"/>
                 <field name="company_id" groups="base.group_multi_company"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -156,7 +156,7 @@
     <record id="action_payment_method" model="ir.actions.act_window">
         <field name="name">Payment Methods</field>
         <field name="res_model">payment.method</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{'search_default_active': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
