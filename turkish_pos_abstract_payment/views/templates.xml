@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Payment Form Template -->
+    <template id="payment_form" name="Abstract Payment Form">
+        <form id="abstract_payment_form" method="POST" action="/payment/abstract/process">
+            <input type="hidden" id="payment_amount" name="amount" t-att-value="amount"/>
+            <input type="hidden" id="payment_currency_id" name="currency_id" t-att-value="currency_id"/>
+            
+            <!-- Test Mode Banner -->
+            <div class="test-mode-banner" t-if="test_mode">
+                <i class="fa fa-flask"/> TEST MODU - Bu bir test ödeme ortamıdır
+            </div>
+            
+            <!-- Messages -->
+            <div id="payment_messages" style="display: none;"/>
+            <div id="payment_errors" style="display: none;"/>
+            
+            <!-- Payment Method Selection -->
+            <div class="payment-method-selector">
+                <label for="payment_method">Ödeme Yöntemi Seçin</label>
+                <select id="payment_method" name="payment_method" class="form-control" required="required">
+                    <option value="">Ödeme yöntemi seçin...</option>
+                </select>
+            </div>
+            
+            <!-- Card Form Container (shown for card payments) -->
+            <div id="card_form_container" style="display: none;">
+                <h4>Kart Bilgileri</h4>
+                
+                <div class="card-input-group">
+                    <label for="card_number">Kart Numarası *</label>
+                    <input type="text" 
+                           id="card_number" 
+                           name="card_number" 
+                           class="form-control" 
+                           placeholder="0000 0000 0000 0000"
+                           maxlength="23"
+                           autocomplete="cc-number"/>
+                </div>
+                
+                <div class="card-input-group">
+                    <label for="card_holder_name">Kart Sahibi Adı *</label>
+                    <input type="text" 
+                           id="card_holder_name" 
+                           name="card_holder_name" 
+                           class="form-control" 
+                           placeholder="AD SOYAD"
+                           autocomplete="cc-name"/>
+                </div>
+                
+                <div class="expiry-cvv-row">
+                    <div class="card-input-group">
+                        <label for="expiry_month">Son Kullanma Tarihi *</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <select id="expiry_month" name="expiry_month" class="form-control" required="required">
+                                <option value="">Ay</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <select id="expiry_year" name="expiry_year" class="form-control" required="required">
+                                <option value="">Yıl</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option>
+                                <option value="2032">2032</option>
+                                <option value="2033">2033</option>
+                                <option value="2034">2034</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="card-input-group">
+                        <label for="cvv">CVV *</label>
+                        <input type="text" 
+                               id="cvv" 
+                               name="cvv" 
+                               class="form-control" 
+                               placeholder="***"
+                               maxlength="4"
+                               autocomplete="cc-csc"/>
+                    </div>
+                </div>
+                
+                <!-- Card Preview -->
+                <div id="card_preview">
+                    <div id="card_brand">CARD</div>
+                    <div data-field="number">**** **** **** ****</div>
+                    <div data-field="holder">KART SAHİBİ ADI</div>
+                    <div>
+                        <small>Son Kullanma:</small>
+                        <span data-field="expiry">**/**</span>
+                    </div>
+                </div>
+                
+                <!-- Installments Container -->
+                <div id="installments_container" style="display: none;">
+                    <h5>Taksit Seçenekleri</h5>
+                    <!-- Dynamically populated by JS -->
+                </div>
+            </div>
+            
+            <!-- Security Badge -->
+            <div class="security-badge">
+                <i class="fa fa-lock"/>
+                <span>Güvenli ödeme - 256-bit SSL şifreleme</span>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="payment-submit-btn">
+                Ödemeyi Tamamla
+            </button>
+        </form>
+    </template>
+    
+    <!-- 3D Secure Page Template -->
+    <template id="payment_3d_secure" name="3D Secure Authentication">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h4><i class="fa fa-shield"/> 3D Secure Kimlik Doğrulama</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <i class="fa fa-spinner fa-spin fa-3x text-primary"/>
+                                    <p class="mt-3">Banka sayfasına yönlendiriliyorsunuz...</p>
+                                </div>
+                                
+                                <div class="alert alert-info">
+                                    <strong>İşlem Referansı:</strong> <t t-esc="transaction_ref"/>
+                                </div>
+                                
+                                <p class="text-muted">
+                                    Lütfen bekleyin, güvenli ödeme sayfasına yönlendiriliyorsunuz.
+                                    Bu işlem birkaç saniye sürebilir.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <!-- Payment Success Template -->
+    <template id="payment_success" name="Payment Success">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h4><i class="fa fa-check-circle"/> Ödeme Başarılı</h4>
+                            </div>
+                            <div class="card-body text-center">
+                                <i class="fa fa-check-circle fa-5x text-success mb-4"/>
+                                <h3>Ödemeniz başarıyla tamamlandı!</h3>
+                                <p class="lead mt-3" t-esc="message"/>
+                                
+                                <div class="alert alert-success mt-4">
+                                    <strong>İşlem Referansı:</strong> <t t-esc="transaction_ref"/>
+                                </div>
+                                
+                                <a href="/shop" class="btn btn-primary btn-lg mt-3">
+                                    Alışverişe Devam Et
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <!-- Payment Error Template -->
+    <template id="payment_error" name="Payment Error">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header bg-danger text-white">
+                                <h4><i class="fa fa-exclamation-triangle"/> Ödeme Hatası</h4>
+                            </div>
+                            <div class="card-body text-center">
+                                <i class="fa fa-times-circle fa-5x text-danger mb-4"/>
+                                <h3>Ödeme işlemi tamamlanamadı</h3>
+                                <p class="lead text-danger mt-3" t-esc="error_message"/>
+                                
+                                <div class="alert alert-warning mt-4" t-if="transaction_ref">
+                                    <strong>İşlem Referansı:</strong> <t t-esc="transaction_ref"/>
+                                </div>
+                                
+                                <p class="text-muted mt-3">
+                                    Lütfen kart bilgilerinizi kontrol ederek tekrar deneyin.
+                                    Sorun devam ederse bankanızla iletişime geçin.
+                                </p>
+                                
+                                <a href="/shop/payment" class="btn btn-primary btn-lg mt-3">
+                                    Tekrar Dene
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <!-- Test Payment Form Template -->
+    <template id="test_payment_form" name="Test Payment Form">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <h2 class="mb-4">Test Payment Form</h2>
+                        
+                        <div class="alert alert-warning">
+                            <i class="fa fa-flask"/> This is a test payment form for development and testing purposes.
+                        </div>
+                        
+                        <t t-call="turkish_pos_abstract_payment.payment_form">
+                            <t t-set="amount" t-value="100.00"/>
+                            <t t-set="currency_id" t-value="1"/>
+                            <t t-set="test_mode" t-value="True"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

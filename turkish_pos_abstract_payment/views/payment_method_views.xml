@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Payment Method Tree View -->
+    <record id="view_payment_method_tree" model="ir.ui.view">
+        <field name="name">payment.method.tree</field>
+        <field name="model">payment.method</field>
+        <field name="arch" type="xml">
+            <tree string="Payment Methods">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="payment_type"/>
+                <field name="supports_installments"/>
+                <field name="active"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Payment Method Form View -->
+    <record id="view_payment_method_form" model="ir.ui.view">
+        <field name="name">payment.method.form</field>
+        <field name="model">payment.method</field>
+        <field name="arch" type="xml">
+            <form string="Payment Method">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Payment Method Name"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Basic Information">
+                            <field name="code"/>
+                            <field name="payment_type"/>
+                            <field name="sequence"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        
+                        <group string="Features">
+                            <field name="supports_installments"/>
+                            <field name="requires_3d_secure"/>
+                            <field name="show_on_checkout"/>
+                            <field name="turkish_pos_enabled"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <!-- General Tab -->
+                        <page string="General" name="general">
+                            <group>
+                                <group string="Description">
+                                    <field name="description" nolabel="1" placeholder="Payment method description..."/>
+                                </group>
+                                
+                                <group string="Gateway">
+                                    <field name="gateway_id"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <!-- Currency & Limits Tab -->
+                        <page string="Currency &amp; Limits" name="currency_limits">
+                            <group>
+                                <group string="Supported Currencies">
+                                    <field name="supported_currency_ids" widget="many2many_tags" nolabel="1"/>
+                                </group>
+                                
+                                <group string="Amount Limits">
+                                    <field name="min_amount"/>
+                                    <field name="max_amount"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <!-- Installments Tab -->
+                        <page string="Installments" name="installments" invisible="not supports_installments">
+                            <group>
+                                <group string="Installment Configuration">
+                                    <field name="max_installments"/>
+                                    <field name="min_installment_amount"/>
+                                </group>
+                                
+                                <group string="Turkish POS Banks" invisible="not turkish_pos_enabled">
+                                    <field name="turkish_pos_bank_ids" widget="many2many_tags" nolabel="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <!-- Transaction Settings Tab -->
+                        <page string="Transaction Settings" name="transaction_settings">
+                            <group>
+                                <group string="Processing">
+                                    <field name="auto_capture"/>
+                                </group>
+                                
+                                <group string="Refunds">
+                                    <field name="allow_refund"/>
+                                    <field name="refund_policy" invisible="not allow_refund"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <!-- Display Tab -->
+                        <page string="Display" name="display">
+                            <group>
+                                <field name="icon" widget="image" class="oe_avatar"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Payment Method Search View -->
+    <record id="view_payment_method_search" model="ir.ui.view">
+        <field name="name">payment.method.search</field>
+        <field name="model">payment.method</field>
+        <field name="arch" type="xml">
+            <search string="Payment Methods">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="payment_type"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter string="Card Payments" name="card" domain="[('payment_type', '=', 'card')]"/>
+                <filter string="Cash Payments" name="cash" domain="[('payment_type', '=', 'cash')]"/>
+                <filter string="Bank Transfer" name="bank_transfer" domain="[('payment_type', '=', 'bank_transfer')]"/>
+                <separator/>
+                <filter string="With Installments" name="with_installments" domain="[('supports_installments', '=', True)]"/>
+                <filter string="3D Secure" name="with_3d" domain="[('requires_3d_secure', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Payment Type" name="group_payment_type" context="{'group_by': 'payment_type'}"/>
+                    <filter string="Company" name="group_company" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Payment Method Action -->
+    <record id="action_payment_method" model="ir.actions.act_window">
+        <field name="name">Payment Methods</field>
+        <field name="res_model">payment.method</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new payment method
+            </p>
+            <p>
+                Configure payment methods for your customers to use during checkout.
+                You can set up cash, credit card, bank transfer, and other payment options.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_payment_abstract_root"
+              name="Abstract Payment"
+              sequence="100"
+              web_icon="turkish_pos_abstract_payment,static/description/icon.png"/>
+
+    <menuitem id="menu_payment_method"
+              name="Payment Methods"
+              parent="menu_payment_abstract_root"
+              action="action_payment_method"
+              sequence="10"/>
+</odoo>

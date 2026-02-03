@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Payment Gateway Tree View -->
+    <record id="view_payment_gateway_tree" model="ir.ui.view">
+        <field name="name">payment.gateway.tree</field>
+        <field name="model">payment.gateway</field>
+        <field name="arch" type="xml">
+            <tree string="Payment Gateways">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="gateway_type"/>
+                <field name="environment"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Payment Gateway Form View -->
+    <record id="view_payment_gateway_form" model="ir.ui.view">
+        <field name="name">payment.gateway.form</field>
+        <field name="model">payment.gateway</field>
+        <field name="arch" type="xml">
+            <form string="Payment Gateway">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Gateway Name"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Basic Information">
+                            <field name="code"/>
+                            <field name="gateway_type"/>
+                            <field name="environment"/>
+                            <field name="sequence"/>
+                        </group>
+                        
+                        <group string="Features">
+                            <field name="supports_3d_secure"/>
+                            <field name="supports_installments"/>
+                            <field name="supports_refunds"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <!-- Credentials Tab -->
+                        <page string="Credentials" name="credentials">
+                            <group>
+                                <field name="credentials" widget="ace" options="{'mode': 'json'}" nolabel="1" placeholder='{"api_key": "your_key", "merchant_id": "your_id"}'/>
+                            </group>
+                        </page>
+                        
+                        <!-- URLs Tab -->
+                        <page string="URLs" name="urls">
+                            <group>
+                                <group string="Gateway URLs">
+                                    <field name="payment_url"/>
+                                    <field name="callback_url"/>
+                                </group>
+                                
+                                <group string="Configuration">
+                                    <field name="timeout"/>
+                                    <field name="retry_count"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Payment Gateway Search View -->
+    <record id="view_payment_gateway_search" model="ir.ui.view">
+        <field name="name">payment.gateway.search</field>
+        <field name="model">payment.gateway</field>
+        <field name="arch" type="xml">
+            <search string="Payment Gateways">
+                <field name="name"/>
+                <field name="code"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter string="Test Mode" name="test" domain="[('environment', '=', 'test')]"/>
+                <filter string="Production" name="production" domain="[('environment', '=', 'production')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Gateway Type" name="group_gateway_type" context="{'group_by': 'gateway_type'}"/>
+                    <filter string="Environment" name="group_environment" context="{'group_by': 'environment'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Payment Gateway Action -->
+    <record id="action_payment_gateway" model="ir.actions.act_window">
+        <field name="name">Payment Gateways</field>
+        <field name="res_model">payment.gateway</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new payment gateway
+            </p>
+            <p>
+                Configure payment gateways to process online payments.
+                Set up credentials and connection details for each gateway.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_payment_gateway"
+              name="Payment Gateways"
+              parent="menu_payment_abstract_root"
+              action="action_payment_gateway"
+              sequence="20"/>
+</odoo>
