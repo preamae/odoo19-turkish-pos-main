@@ -10,6 +10,7 @@ This module provides a complete abstract payment infrastructure for Odoo 19 with
 - **Category:** Accounting/Payment
 - **License:** LGPL-3
 - **Author:** Turkish POS Team
+- **Dependencies:** `turkish_pos` (required), `base`, `payment`, `website_sale`, `product`, `sale`, `web`
 
 ## Files Created
 

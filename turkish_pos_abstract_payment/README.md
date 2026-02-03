@@ -74,24 +74,35 @@ Turkish POS Abstract Payment is a comprehensive, extensible payment infrastructu
 ### Prerequisites
 - Odoo 19.0
 - Python 3.10+
+- **Turkish POS module** (`turkish_pos`) - Must be installed first
 - Base Odoo modules: `base`, `payment`, `website_sale`, `product`, `sale`, `web`
 
 ### Steps
 
-1. **Copy module to addons directory:**
+**Important:** The Turkish POS (`turkish_pos`) module must be installed before installing this module.
+
+1. **Install Turkish POS module first:**
+   ```bash
+   # If not already installed
+   cd /opt/odoo/addons
+   # Ensure turkish_pos module is present
+   # Install it via Odoo Apps interface
+   ```
+
+2. **Copy module to addons directory:**
    ```bash
    cd /opt/odoo/addons
    cp -r /path/to/turkish_pos_abstract_payment .
    ```
 
-2. **Restart Odoo:**
+3. **Restart Odoo:**
    ```bash
    sudo systemctl restart odoo
    # or
    ./odoo-bin -c odoo.conf --stop-after-init -u all
    ```
 
-3. **Update Apps List:**
+4. **Update Apps List:**
    - Go to **Apps** menu
    - Click **Update Apps List**
    - Search for "Turkish POS Abstract Payment"

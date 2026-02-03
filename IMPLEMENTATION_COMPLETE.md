@@ -292,8 +292,11 @@ All required files created as specified:
 
 ## Installation
 
+**Important:** The `turkish_pos` module must be installed first as this module depends on it.
+
 ```bash
-# Copy module
+# Ensure turkish_pos is installed first
+# Then copy abstract payment module
 cp -r turkish_pos_abstract_payment /opt/odoo/addons/
 
 # Restart Odoo

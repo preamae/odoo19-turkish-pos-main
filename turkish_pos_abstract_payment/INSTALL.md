@@ -9,9 +9,24 @@ odoo-bin --version  # Should be 19.0 or higher
 
 # Check Python version
 python3 --version  # Should be 3.10 or higher
+
+# IMPORTANT: Ensure Turkish POS module is installed
+# This module depends on turkish_pos and must be installed first
 ```
 
-### 2. Install Module
+### 2. Install Turkish POS Module (if not already installed)
+
+The `turkish_pos` module must be installed before installing this module.
+
+```bash
+# Verify turkish_pos is in your addons path
+ls /opt/odoo/addons/turkish_pos
+
+# If not present, install it first via Odoo Apps interface
+# or copy it to the addons directory
+```
+
+### 3. Install Abstract Payment Module
 
 #### Option A: Manual Installation
 ```bash

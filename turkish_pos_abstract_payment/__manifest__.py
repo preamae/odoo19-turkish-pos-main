@@ -31,6 +31,7 @@ Extensible abstract payment infrastructure for Turkish POS with:
         'product',
         'sale',
         'web',
+        'turkish_pos',  # Required for turkish.pos.bank and turkish.pos.bin models
     ],
     'data': [
         # Security
