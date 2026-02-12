@@ -1,0 +1,336 @@
+# Translation for Turkish POS Abstract Payment module
+# Turkish (tr_TR)
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 12:00+0000\n"
+"PO-Revision-Date: 2024-01-01 12:00+0000\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model,name:turkish_pos_abstract_payment.model_abstract_payment_method
+msgid "Abstract Payment Method"
+msgstr "Soyut Ödeme Yöntemi"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model,name:turkish_pos_abstract_payment.model_payment_method
+msgid "Payment Method"
+msgstr "Ödeme Yöntemi"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model,name:turkish_pos_abstract_payment.model_payment_gateway
+msgid "Payment Gateway"
+msgstr "Ödeme Ağ Geçidi"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__name
+msgid "Method Name"
+msgstr "Yöntem Adı"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__code
+msgid "Method Code"
+msgstr "Yöntem Kodu"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__payment_type
+msgid "Payment Type"
+msgstr "Ödeme Tipi"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__supports_installments
+msgid "Supports Installments"
+msgstr "Taksit Desteği"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__requires_3d_secure
+msgid "Requires 3D Secure"
+msgstr "3D Secure Gerektirir"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__min_amount
+msgid "Minimum Amount"
+msgstr "Minimum Tutar"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__max_amount
+msgid "Maximum Amount"
+msgstr "Maksimum Tutar"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__supported_currency_ids
+msgid "Supported Currencies"
+msgstr "Desteklenen Para Birimleri"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__turkish_pos_enabled
+msgid "Enable Turkish POS"
+msgstr "Türk POS'u Etkinleştir"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__max_installments
+msgid "Maximum Installments"
+msgstr "Maksimum Taksit Sayısı"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.model.fields,field_description:turkish_pos_abstract_payment.field_payment_method__min_installment_amount
+msgid "Minimum Installment Amount"
+msgstr "Minimum Taksit Tutarı"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.actions.act_window,name:turkish_pos_abstract_payment.action_payment_method
+#: model:ir.ui.menu,name:turkish_pos_abstract_payment.menu_payment_method
+msgid "Payment Methods"
+msgstr "Ödeme Yöntemleri"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.actions.act_window,name:turkish_pos_abstract_payment.action_payment_gateway
+#: model:ir.ui.menu,name:turkish_pos_abstract_payment.menu_payment_gateway
+msgid "Payment Gateways"
+msgstr "Ödeme Ağ Geçitleri"
+
+#. module: turkish_pos_abstract_payment
+#: model:ir.ui.menu,name:turkish_pos_abstract_payment.menu_payment_abstract_root
+msgid "Abstract Payment"
+msgstr "Soyut Ödeme"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/abstract_payment_method.py
+msgid "Payment amount must be greater than zero."
+msgstr "Ödeme tutarı sıfırdan büyük olmalıdır."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/abstract_payment_method.py
+msgid "Payment amount (%.2f) is below the minimum (%.2f)."
+msgstr "Ödeme tutarı (%.2f) minimumun (%.2f) altındadır."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/abstract_payment_method.py
+msgid "Payment amount (%.2f) exceeds the maximum (%.2f)."
+msgstr "Ödeme tutarı (%.2f) maksimumu (%.2f) aşmaktadır."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/abstract_payment_method.py
+msgid "Currency %s is not supported by this payment method."
+msgstr "%s para birimi bu ödeme yöntemi tarafından desteklenmiyor."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/abstract_payment_method.py
+msgid "Payment amount is valid."
+msgstr "Ödeme tutarı geçerlidir."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Payment method not found"
+msgstr "Ödeme yöntemi bulunamadı"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Currency not found"
+msgstr "Para birimi bulunamadı"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Invalid card number"
+msgstr "Geçersiz kart numarası"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Card number must be 13-19 digits"
+msgstr "Kart numarası 13-19 rakam olmalıdır"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Cardholder name is required"
+msgstr "Kart sahibi adı gereklidir"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Invalid expiry month"
+msgstr "Geçersiz son kullanma ayı"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Expiry month must be 1-12"
+msgstr "Son kullanma ayı 1-12 arası olmalıdır"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Invalid expiry year"
+msgstr "Geçersiz son kullanma yılı"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Expiry year must be 4 digits"
+msgstr "Son kullanma yılı 4 rakam olmalıdır"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "Invalid CVV"
+msgstr "Geçersiz CVV"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/controllers/payment_abstract.py
+msgid "CVV must be 3 or 4 digits"
+msgstr "CVV 3 veya 4 rakam olmalıdır"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/payment_method.py
+msgid "Cash payment initiated. Please collect cash from customer."
+msgstr "Nakit ödeme başlatıldı. Lütfen müşteriden nakit tahsil edin."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/payment_method.py
+msgid "Card data is required for card payments."
+msgstr "Kart ödemeleri için kart bilgileri gereklidir."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/payment_method.py
+msgid "Redirecting to 3D Secure authentication..."
+msgstr "3D Secure kimlik doğrulamasına yönlendiriliyor..."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/payment_method.py
+msgid "Card payment processed successfully."
+msgstr "Kart ödemesi başarıyla işlendi."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/payment_method.py
+msgid "Bank transfer initiated. Please transfer funds to the provided account."
+msgstr "Banka havalesi başlatıldı. Lütfen verilen hesaba para transfer edin."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/integration_dummyGateway.py
+msgid "Gateway %s is not active"
+msgstr "Ağ geçidi %s aktif değil"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/integration_dummyGateway.py
+msgid "Redirecting to 3D Secure authentication..."
+msgstr "3D Secure kimlik doğrulamasına yönlendiriliyor..."
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/integration_dummyGateway.py
+msgid "Payment processed successfully (dummy mode)"
+msgstr "Ödeme başarıyla işlendi (test modu)"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/integration_dummyGateway.py
+msgid "Payment completed successfully (dummy mode)"
+msgstr "Ödeme başarıyla tamamlandı (test modu)"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/integration_dummyGateway.py
+msgid "Payment failed or cancelled (dummy mode)"
+msgstr "Ödeme başarısız veya iptal edildi (test modu)"
+
+#. module: turkish_pos_abstract_payment
+#: code:addons/turkish_pos_abstract_payment/models/integration_dummyGateway.py
+msgid "Refund processed successfully (dummy mode)"
+msgstr "İade başarıyla işlendi (test modu)"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "TEST MODE - This is a test payment environment"
+msgstr "TEST MODU - Bu bir test ödeme ortamıdır"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "Select Payment Method"
+msgstr "Ödeme Yöntemi Seçin"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "Card Information"
+msgstr "Kart Bilgileri"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "Card Number"
+msgstr "Kart Numarası"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "Cardholder Name"
+msgstr "Kart Sahibi Adı"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "Expiry Date"
+msgstr "Son Kullanma Tarihi"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "Installment Options"
+msgstr "Taksit Seçenekleri"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "Complete Payment"
+msgstr "Ödemeyi Tamamla"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_form
+msgid "Secure payment - 256-bit SSL encryption"
+msgstr "Güvenli ödeme - 256-bit SSL şifreleme"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_success
+msgid "Payment Successful"
+msgstr "Ödeme Başarılı"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_success
+msgid "Your payment has been completed successfully!"
+msgstr "Ödemeniz başarıyla tamamlandı!"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_success
+msgid "Continue Shopping"
+msgstr "Alışverişe Devam Et"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_error
+msgid "Payment Error"
+msgstr "Ödeme Hatası"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_error
+msgid "Payment could not be completed"
+msgstr "Ödeme işlemi tamamlanamadı"
+
+#. module: turkish_pos_abstract_payment
+#: view:website:turkish_pos_abstract_payment.payment_error
+msgid "Try Again"
+msgstr "Tekrar Dene"
+
+#. module: turkish_pos_abstract_payment
+#: selection:payment.method,payment_type:0
+msgid "Cash"
+msgstr "Nakit"
+
+#. module: turkish_pos_abstract_payment
+#: selection:payment.method,payment_type:0
+msgid "Credit/Debit Card"
+msgstr "Kredi/Banka Kartı"
+
+#. module: turkish_pos_abstract_payment
+#: selection:payment.method,payment_type:0
+msgid "Bank Transfer"
+msgstr "Banka Havalesi"
+
+#. module: turkish_pos_abstract_payment
+#: selection:payment.method,payment_type:0
+msgid "Digital Wallet"
+msgstr "Dijital Cüzdan"
+
+#. module: turkish_pos_abstract_payment
+#: selection:payment.method,payment_type:0
+msgid "Other"
+msgstr "Diğer"
